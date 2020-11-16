@@ -2,14 +2,14 @@
 <p align="center">
   <h3 align="center">Rovers</h3>
   <p align="center">
-    A prototype of the Rovers environment for reinforcement learning.
+    A prototype of the Rovers environment.
     <br />
     <br />
-    <a href="">View Python Bindings</a>
+    <a href=https://github.com/gaurav-dixitv/rovers#usage>View Python Bindings</a>
     ·
-    <a href="">Report Bug</a>
+    <a href="https://github.com/gaurav-dixitv/rovers/issues">Report Bug</a>
     ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/gaurav-dixitv/rovers/issues">Request Feature</a>
   </p>
 </p>
 
@@ -18,7 +18,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [About The Project](#about-the-project)
+- [Rovers](#rovers)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -33,7 +33,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Rovers
 
 A prototype of the Rovers environment. Written as a C++ template header-only library, it can be used in a project by including a single entry header wihout the need for a shared/dynamic library. Python bindings are provided for prototyping.
 
@@ -46,7 +46,7 @@ The library is designed for:
 The library uses parts of thyme -- you will notice references to the `thyme` namespace in the utility classes. Eigen is used for linear algebra on the [CG]PU. The python bindings were generated using cppyy. 
 * [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 * [cppyy](https://cppyy.readthedocs.io/en/latest/)
-* [thyme]()
+* [thyme]([https://github.com/gaurav-dixitv/rovers.git])
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -74,7 +74,7 @@ sudo pip3 install virtualenv
 
 1. Clone the repo
 ```sh
-git clone   
+git clone https://github.com/gaurav-dixitv/rovers.git
 ```
 2. Create a virtual environment
 ```sh
