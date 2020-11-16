@@ -1,0 +1,6 @@
+cppyy==1.8.6
+cppyy-backend==1.14.1
+cppyy-cling==6.21.4
+CPyCppyy==1.11.7
+numpy==1.19.4
+tqdm==4.51.0
