@@ -35,10 +35,10 @@
 <!-- ABOUT THE PROJECT -->
 ## Rovers
 
-A prototype of the Rovers environment. Written as a C++ template header-only library, it can be used in a project by including a single entry header wihout the need for a shared/dynamic library. Python bindings are provided for prototyping.
+A prototype of the Rovers environment. A C++ template header-only library. Directly use the headers in your project -- does not need compilation, packaging and installation. Python bindings are provided for prototyping.
 
-The library is designed for:
-* Ease of use: The library manages all the hairy bits (think memory, threading, generics) for you. 
+The library is designed for
+* Ease of use: Manages all the hairy bits (think memory, threading, generics). 
 * Flexibility: Algorithms are agent/environment/learning agnostic and can be mixed in a variety of ways. Language bindings provide an interface for rapid prototyping. 
 * Performance: The rover environment was part of the thyme library for rl, evolution and planning with cpu/gpu/threading optimizations: pay only for what you use.
 

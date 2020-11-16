@@ -1,4 +1,4 @@
-CXX =	g++-10
+CXX =	g++
 CXXFLAGS =	-Wall -Werror -Wextra -pedantic		\
 			-std=c++17 \
 
