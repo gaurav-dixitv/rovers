@@ -1,7 +1,7 @@
 #ifndef THYME_ENVIRONMENTS_ROVERS_ROVER_TYPES
 #define THYME_ENVIRONMENTS_ROVERS_ROVER_TYPES
 
-#include <utilities/shared_wrapper.hpp>
+#include <rovers/utilities/shared_wrapper.hpp>
 
 /*
 *

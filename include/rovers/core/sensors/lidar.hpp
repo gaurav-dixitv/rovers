@@ -2,11 +2,11 @@
 #define THYME_ENVIRONMENTS_ROVERS_LIDAR
 
 #include <Eigen/Dense>
-#include <core/detail/pack.hpp>
-#include <core/poi/poi.hpp>
-#include <core/rover/rover.hpp>
 #include <numeric>
-#include <utilities/math/norms.hpp>
+#include <rovers/core/detail/pack.hpp>
+#include <rovers/core/poi/poi.hpp>
+#include <rovers/core/rover/rover.hpp>
+#include <rovers/utilities/math/norms.hpp>
 // #include <ranges> // changed for python branch
 #include <vector>
 

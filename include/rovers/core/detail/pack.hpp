@@ -1,10 +1,10 @@
 #ifndef THYME_ENVIRONMENTS_ROVERS_PACK
 #define THYME_ENVIRONMENTS_ROVERS_PACK
 
-#include <core/detail/agent_types.hpp>
-#include <core/detail/entity_types.hpp>
 #include <functional>
-#include <utilities/ranges.hpp>
+#include <rovers/core/detail/agent_types.hpp>
+#include <rovers/core/detail/entity_types.hpp>
+#include <rovers/utilities/ranges.hpp>
 
 /*
  *

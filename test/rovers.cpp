@@ -1,10 +1,10 @@
 
-#include <core/poi/type_constraint.hpp>
-#include <core/rewards/difference.hpp>
-#include <core/setup/init_corners.hpp>
-#include <environment.hpp>
+#include <rovers/core/poi/type_constraint.hpp>
+#include <rovers/core/rewards/difference.hpp>
+#include <rovers/core/setup/init_corners.hpp>
+#include <rovers/environment.hpp>
 #include <iostream>
-#include <utilities/spaces/discrete.hpp>
+#include <rovers/utilities/spaces/discrete.hpp>
 
 int main() {
     using namespace rovers;

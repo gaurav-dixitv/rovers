@@ -2,21 +2,21 @@
 #define THYME_ENVIRONMENTS_ROVERS_ROVER
 
 #include <Eigen/Dense>
-#include <core/detail/agent_types.hpp>
-#include <core/detail/entity_types.hpp>
-#include <core/detail/pack.hpp>
-#include <core/rewards/global.hpp>
 #include <iostream>
-#include <utilities/math/cartesian.hpp>
+#include <rovers/core/detail/agent_types.hpp>
+#include <rovers/core/detail/entity_types.hpp>
+#include <rovers/core/detail/pack.hpp>
+#include <rovers/core/rewards/global.hpp>
+#include <rovers/utilities/math/cartesian.hpp>
 #include <vector>
 
 namespace rovers {
 
 /*
-*
-* rover interface
-*
-*/
+ *
+ * rover interface
+ *
+ */
 class IRover {
     using Point = thyme::math::Point;
     using ActionType = size_t;
@@ -66,12 +66,11 @@ class IRover {
     ActionType m_action;
 };
 
-
 /*
-*
-* Default boilerplate rover
-*
-*/
+ *
+ * Default boilerplate rover
+ *
+ */
 template <typename SensorType, typename ActionSpace, typename RewardType = rewards::Global>
 class Rover final : public IRover {
     using SType = thyme::utilities::SharedWrap<SensorType>;
@@ -95,12 +94,11 @@ class Rover final : public IRover {
     RType m_reward;
 };
 
-
 /*
-*
-* Example of bringing in a new Rover from the python bindings
-*
-*/
+ *
+ * Example of bringing in a new Rover from the python bindings
+ *
+ */
 class Drone final : public IRover {
    public:
     Drone(double obs_radius = 1.0) : IRover(obs_radius) {}

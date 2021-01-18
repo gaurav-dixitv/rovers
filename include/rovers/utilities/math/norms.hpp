@@ -2,7 +2,7 @@
 #define THYME_MATH_NORMS
 
 #include <cmath>
-#include <utilities/math/cartesian.hpp>
+#include <rovers/utilities/math/cartesian.hpp>
 
 namespace thyme::math {
 

@@ -1,7 +1,7 @@
 #ifndef THYME_ENVIRONMENTS_ROVERS_POI_TYPES
 #define THYME_ENVIRONMENTS_ROVERS_POI_TYPES
 
-#include <utilities/shared_wrapper.hpp>
+#include <rovers/utilities/shared_wrapper.hpp>
 
 /*
  *

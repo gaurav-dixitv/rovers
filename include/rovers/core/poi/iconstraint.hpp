@@ -1,7 +1,7 @@
 #ifndef THYME_ENVIRONMENTS_ROVERS_POI_ICONSTRAINT
 #define THYME_ENVIRONMENTS_ROVERS_POI_ICONSTRAINT
 
-#include <core/detail/pack.hpp>
+#include <rovers/core/detail/pack.hpp>
 
 namespace rovers {
 

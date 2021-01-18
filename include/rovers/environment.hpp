@@ -2,14 +2,14 @@
 #define THYME_ENVIRONMENTS_ROVERS_ENVIRONMENT
 
 #include <Eigen/Dense>
-#include <core/poi/count_constraint.hpp>
-#include <core/poi/poi.hpp>
-#include <core/poi/type_constraint.hpp>
-#include <core/rover/rover.hpp>
-#include <core/sensors/lidar.hpp>
-#include <core/setup/init_random.hpp>
+#include <rovers/core/poi/count_constraint.hpp>
+#include <rovers/core/poi/poi.hpp>
+#include <rovers/core/poi/type_constraint.hpp>
+#include <rovers/core/rover/rover.hpp>
+#include <rovers/core/sensors/lidar.hpp>
+#include <rovers/core/setup/init_random.hpp>
+#include <rovers/utilities/spaces/discrete.hpp>
 #include <tuple>
-#include <utilities/spaces/discrete.hpp>
 #include <vector>
 
 namespace rovers {
