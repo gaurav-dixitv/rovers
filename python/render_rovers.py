@@ -47,12 +47,12 @@ class RoversViewer(rendering.Viewer):
         gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
 
     def update(self):
-        for rover in env.rovers():
+        for rover in self.env.rovers():
             position = rover.position()
             transform = rendering.Transform(translation=(position.x, position.y))
             self.draw_circle(0.5, 30, color=(1.0, 0.0, 0.0, 0.1), filled=True).add_attr(transform)
 
-        for poi in env.pois():
+        for poi in self.env.pois():
             position = poi.position()
             transform = rendering.Transform(translation=(position.x, position.y))
             self.draw_circle(1.0, 30, color=(0.0, 0.0, 1.0, 0.1), filled=True).add_attr(transform)
