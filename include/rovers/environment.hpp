@@ -34,6 +34,9 @@ class Environment {
     void set_rovers(std::vector<Agent> rovers) { m_rovers = std::move(rovers); }
     void set_pois(std::vector<Entity> pois) { m_pois = std::move(pois); }
 
+    const std::vector<Agent>& rovers() { return m_rovers; }
+    const std::vector<Entity>& pois() { return m_pois; }
+
     std::tuple<State, Reward> step(std::vector<Action> actions) {
         for (size_t i = 0; i < m_rovers.size(); ++i) {
             auto& rover = m_rovers[i];
