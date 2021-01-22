@@ -71,7 +71,7 @@ if __name__ == "__main__":
     from librovers import *  # import bindings.
 
     """
-    Random walk at every step.
+    Random walk at every step. Weight the movement by the size of the action.
     """
     class RandomWalkRover (rovers.IRover):
         def __init__(self, obs_radius=1.0):
@@ -84,8 +84,10 @@ if __name__ == "__main__":
             return rovers.rewards.Difference().compute(agent_pack)
 
         def apply_action(self):
-            x = self.position().x + random.uniform(-0.1, 0.1)
-            y = self.position().y + random.uniform(-0.1, 0.1)
+            # The action is set before `apply_action()` is called
+            action = self.action()
+            x = self.position().x + random.uniform(-0.01*action, 0.01*action)
+            y = self.position().y + random.uniform(-0.01*action, 0.01*action)
             self.set_position(x, y)
 
     # aliasing some types to reduce typing
@@ -113,8 +115,8 @@ if __name__ == "__main__":
     states, rewards = env.reset()
 
     renderer = RoversViewer(env)
-    steps = 20000
+    steps = 2000
     for step in range(steps):
-        states, rewards = env.step([[0.0] for rover in env.rovers()])
+        states, rewards = env.step([10 for rover in env.rovers()])
         renderer.update()
         renderer.render()
