@@ -18,6 +18,18 @@ def set_color(self, r: float, g: float, b: float, a=1.0):
     self._color.vec4 = (r, g, b, a)
 rendering.Geom.set_color = set_color  # Monkey_patch to allow alpha
 
+def make_arc(angle, radius=10, res=None, filled=True):
+    # Use a default of 30 if angle is 2pi, adjust based on the angle
+    if res is None:
+        res = math.ceil(30 * radius * angle / (2*math.pi))
+    points = [(0.0, 0.0)]
+    for i in range(res):
+        ang = angle * (i / (res - 1) - 0.5)
+        points.append((math.cos(ang)*radius, math.sin(ang)*radius))
+    if filled:
+        return rendering.FilledPolygon(points)
+    return rendering.PolyLine(points, True)
+
 class RoversViewer(rendering.Viewer):
 
     primary_width = 1024.0
@@ -46,16 +58,38 @@ class RoversViewer(rendering.Viewer):
         gl.glEnable(gl.GL_BLEND)
         gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
 
+    def draw_arc(self, angle, radius=1, res=None, filled=True, **attrs):
+        # Use a default of 30 if angle is 2pi, adjust based on the angle
+        if res is None:
+            res = math.ceil(30 * radius * angle / (2*math.pi))
+        geom = make_arc(angle, radius=radius, res=res, filled=filled)
+        rendering._add_attrs(geom, attrs)
+        self.add_onetime(geom)
+        return geom
+
     def update(self):
+        # Environment space of 10x10 grid
+        width = 10
+        height = 10
+        for i in range(width + 1):
+            self.draw_line((float(i), 0.0), (float(i), float(height)), color=(0.0, 0.0, 0.0, 0.1))
+        for i in range(height + 1):
+            self.draw_line((0.0, float(i)), (float(width), float(i)), color=(0.0, 0.0, 0.0, 0.1))
+
         for rover in self.env.rovers():
             position = rover.position()
             transform = rendering.Transform(translation=(position.x, position.y))
-            self.draw_circle(0.5, 30, color=(1.0, 0.0, 0.0, 0.1), filled=True).add_attr(transform)
+            color = (1.0, 0.0, 0.0, 0.5)
+            if hasattr(rover, "color"):
+                color = rover.color
+            self.draw_circle(0.5, 30, color=color, filled=True).add_attr(transform)
+            # Draw a sensor as 120 degrees for now
+            self.draw_arc(math.pi / 3, rover.obs_radius(), color=(1.0, 0.0, 0.0, 0.1)).add_attr(transform)
 
         for poi in self.env.pois():
             position = poi.position()
             transform = rendering.Transform(translation=(position.x, position.y))
-            self.draw_circle(1.0, 30, color=(0.0, 0.0, 1.0, 0.1), filled=True).add_attr(transform)
+            self.draw_circle(1.0, 30, color=(0.0, 0.0, 1.0, 0.5), filled=True).add_attr(transform)
 
 
 
@@ -74,6 +108,9 @@ if __name__ == "__main__":
     Random walk at every step. Weight the movement by the size of the action.
     """
     class RandomWalkRover (rovers.IRover):
+
+        color = (0.0, 1.0, 0.0, 0.5)
+
         def __init__(self, obs_radius=1.0):
             super().__init__(obs_radius)
 
