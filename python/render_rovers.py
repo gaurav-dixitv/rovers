@@ -128,7 +128,7 @@ if __name__ == "__main__":
         rovers.Drone()
     ]
     pois = [
-        rovers.POI[rovers.CountConstraint](3),
+        rovers.POI[rovers.CountConstraint](3, 1.0, 1),
         rovers.POI[rovers.TypeConstraint](2, 1.0),
         rovers.POI[rovers.TypeConstraint](5),
         rovers.POI[rovers.TypeConstraint](2)
