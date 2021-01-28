@@ -75,7 +75,10 @@ class RoversViewer(rendering.Viewer):
         for poi in self.env.pois():
             position = poi.position()
             transform = rendering.Transform(translation=(position.x, position.y))
-            self.draw_circle(1.0, 30, color=(0.0, 0.0, 1.0, 0.5), filled=True).add_attr(transform)
+            color = (0.0, 0.0, 1.0, 0.2)
+            if poi.observed():
+                color = (0.0, 0.0, 1.0, 0.7)
+            self.draw_circle(poi.obs_radius(), 30, color=color, filled=True).add_attr(transform)
 
 
 
