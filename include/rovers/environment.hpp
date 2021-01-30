@@ -27,8 +27,12 @@ class Environment {
     using Reward = std::vector<double>;
 
     Environment(InitPolicy initPolicy = InitPolicy(), std::vector<Agent> rovers = {},
-                std::vector<Entity> pois = {})
-        : m_initPolicy(initPolicy), m_rovers(std::move(rovers)), m_pois(std::move(pois)) {}
+                std::vector<Entity> pois = {}, size_t width = 10.0, size_t height = 10.0)
+        : m_initPolicy(initPolicy),
+          m_rovers(std::move(rovers)),
+          m_pois(std::move(pois)),
+          m_width(width),
+          m_height(height) {}
 
     // helpers to set rovers/pois after the fact
     void set_rovers(std::vector<Agent> rovers) { m_rovers = std::move(rovers); }
@@ -67,12 +71,14 @@ class Environment {
     void render() {}
     void close() {}
 
+    const size_t& width() { return m_width; }
+    const size_t& height() { return m_height; }
     // TODO add pre/post update for all components
 
    private:
     inline void clamp_bounds(Agent& rover) {
-        rover->set_position(std::clamp(rover->position().x, 0.0, 10.0),
-                            std::clamp(rover->position().y, 0.0, 10.0));
+        rover->set_position(std::clamp(rover->position().x, 0.0, 1.0 * m_width),
+                            std::clamp(rover->position().y, 0.0, 1.0 * m_height));
     }
 
     std::tuple<State, Reward> status() {
@@ -90,6 +96,9 @@ class Environment {
     InitPolicy m_initPolicy;
     std::vector<Agent> m_rovers;
     std::vector<Entity> m_pois;
+
+    size_t m_width;
+    size_t m_height;
 };
 
 /*

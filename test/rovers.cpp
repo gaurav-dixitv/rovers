@@ -35,7 +35,7 @@ int main() {
 
     Actions actions;
     for (size_t i = 0; i < rovers.size(); ++i) {
-        actions.emplace_back(Eigen::Vector2d::Random()); // random dx, dy
+        actions.emplace_back(Eigen::Vector2d::Random());  // random dx, dy
     }
     auto [states, rewards] = env.step(actions);
     // print sample state
