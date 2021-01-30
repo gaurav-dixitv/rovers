@@ -19,7 +19,7 @@ namespace rovers {
  */
 class IRover {
     using Point = thyme::math::Point;
-    using ActionType = size_t;
+    using ActionType = Eigen::MatrixXd;
     using StateType = Eigen::MatrixXd;
 
    public:
@@ -33,6 +33,9 @@ class IRover {
         m_position.x = x;
         m_position.y = y;
         m_path.push_back(Point(x, y));
+    }
+    void update_position (double dx, double dy){
+        set_position(m_position.x + dx, m_position.y + dy);
     }
 
     const double& obs_radius() const { return m_obs_radius; }
@@ -48,13 +51,7 @@ class IRover {
     [[nodiscard]] virtual StateType scan(const AgentPack&) const = 0;
     [[nodiscard]] virtual double reward(const AgentPack&) const = 0;
 
-    const ActionType& action() const { return m_action; }
-    void set_action(ActionType action) { m_action = std::move(action); }
-    void apply_action(ActionType action) {
-        set_action(std::move(action));
-        apply_action();
-    }
-    virtual void apply_action() = 0;
+    virtual void act(const ActionType&) = 0;
 
    protected:
     virtual void tick() {}
@@ -63,7 +60,6 @@ class IRover {
     double m_obs_radius;
     Point m_position;
     std::vector<Point> m_path;
-    ActionType m_action;
 };
 
 /*
@@ -75,7 +71,7 @@ template <typename SensorType, typename ActionSpace, typename RewardType = rewar
 class Rover final : public IRover {
     using SType = thyme::utilities::SharedWrap<SensorType>;
     using RType = thyme::utilities::SharedWrap<RewardType>;
-
+    using ActionType = Eigen::MatrixXd;
    public:
     Rover(double obs_radius = 1.0, SType sensor = SensorType(), RType reward = RewardType())
         : IRover(obs_radius), m_sensor(sensor), m_reward(reward) {}
@@ -86,7 +82,11 @@ class Rover final : public IRover {
     [[nodiscard]] virtual double reward(const AgentPack& pack) const override {
         return m_reward->compute(pack);
     }
-    void apply_action() override { /*manifest the action physically. Example, move.*/
+    void act(const ActionType& action) override {
+        // default, move in x and y
+        assert(action.rows() >= 2);
+        auto act = static_cast<Eigen::Vector2d>(action);
+        update_position(act[0], act[1]);
     }
 
    private:
@@ -105,8 +105,7 @@ class Drone final : public IRover {
 
     [[nodiscard]] virtual Eigen::MatrixXd scan(const AgentPack&) const override { return {}; }
     [[nodiscard]] virtual double reward(const AgentPack&) const override { return 0; }
-    void apply_action() override { /*manifest the action physically. Example, move.*/
-    }
+    void act(const Eigen::MatrixXd&) override { }
 };
 
 }  // namespace rovers

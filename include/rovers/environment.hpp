@@ -22,7 +22,7 @@ namespace rovers {
 template <typename InitPolicy = RandomInit>
 class Environment {
    public:
-    using Action = size_t;
+    using Action = Eigen::MatrixXd;
     using State = std::vector<Eigen::MatrixXd>;
     using Reward = std::vector<double>;
 
@@ -43,7 +43,7 @@ class Environment {
             // call update for all rovers
             rover->update();
             // take actions
-            rover->apply_action(actions[i]);
+            rover->act(actions[i]);
             // bound position
             clamp_bounds(rover);
         }
@@ -99,7 +99,7 @@ class Environment {
  */
 using Agents = std::vector<Agent>;
 using Entities = std::vector<Entity>;
-using Actions = std::vector<size_t>;
+using Actions = std::vector<Eigen::MatrixXd>;
 
 Eigen::MatrixXd tensor(std::vector<double> list) {
     return Eigen::Map<Eigen::MatrixXd>(list.data(), list.size(), 1);

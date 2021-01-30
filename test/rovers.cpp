@@ -1,9 +1,9 @@
 
+#include <iostream>
 #include <rovers/core/poi/type_constraint.hpp>
 #include <rovers/core/rewards/difference.hpp>
 #include <rovers/core/setup/init_corners.hpp>
 #include <rovers/environment.hpp>
-#include <iostream>
 #include <rovers/utilities/spaces/discrete.hpp>
 
 int main() {
@@ -17,7 +17,8 @@ int main() {
     Agents rovers;
     // create agent with lidar, discrete action space and difference reward:
     rovers << Rover<Close, Discreet, rewards::Difference>(2.0, Close(45));
-    // Defaults to global/env reward when not specified. Create two rovers with dense lidars and global reward:
+    // Defaults to global/env reward when not specified. Create two rovers with dense lidars and
+    // global reward:
     rovers << Rover<Dense, Discreet>(1.0, Dense(90)) << Rover<Dense, Discreet>(3.0, Dense(90));
     // a flying drone!
     rovers << Drone();
@@ -25,13 +26,17 @@ int main() {
     // or without the << sugar. Three POIs with Count and Type constraints:
     Entities pois = {POI<CountConstraint>(3), POI<TypeConstraint>(2, 1.0), POI<TypeConstraint>(5)};
 
-    // Environment with rovers and pois placed in the corners. Defaults to random initialization if unspecified.
+    // Environment with rovers and pois placed in the corners. Defaults to random initialization if
+    // unspecified.
     using Env = Environment<CornersInit>;
     // Create an environment with our rovers and pois:
     auto env = Env(CornersInit(10.0), rovers, pois);
     env.reset();
 
-    Actions actions(rovers.size());  // random actions
+    Actions actions;
+    for (size_t i = 0; i < rovers.size(); ++i) {
+        actions.emplace_back(Eigen::Vector2d::Random()); // random dx, dy
+    }
     auto [states, rewards] = env.step(actions);
     // print sample state
     std::cout << "\nSample environment state (each row corresponds to the state of a rover): "

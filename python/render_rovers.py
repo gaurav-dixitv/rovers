@@ -109,11 +109,11 @@ if __name__ == "__main__":
         def reward(self, agent_pack):
             return rovers.rewards.Difference().compute(agent_pack)
 
-        def apply_action(self):
-            # The action is set before `apply_action()` is called
-            action = self.action()
-            x = self.position().x + random.uniform(-0.01*action, 0.01*action)
-            y = self.position().y + random.uniform(-0.01*action, 0.01*action)
+        def act(self, action):
+            dx = action(0)
+            dy = action(1)
+            x = self.position().x + random.uniform(-0.01*dx, 0.01*dx)
+            y = self.position().y + random.uniform(-0.01*dy, 0.01*dy)
             self.set_position(x, y)
 
     # aliasing some types to reduce typing
