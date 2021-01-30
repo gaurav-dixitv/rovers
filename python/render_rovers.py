@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     agents = [
         rovers.Rover[Close, Discrete](2.0, Close(90)),
-        rovers.Rover[Close, Discrete](2.0, Close(90))
+        rovers.Rover[Close, Discrete](5.0, Close(90))
     ]
     pois = [
         rovers.POI[rovers.CountConstraint](3, 1.0, 1),
@@ -108,8 +108,8 @@ if __name__ == "__main__":
     # Environment with rovers and pois placed in the corners. Defaults to random initialization if unspecified.
     Env = rovers.Environment[rovers.CornersInit]
     
-    width = 20
-    height = 20
+    width = 50
+    height = 50
     # create a (width * height) environment
     env = Env(rovers.CornersInit(width), agents, pois, width, height)
     states, rewards = env.reset()
@@ -122,10 +122,10 @@ if __name__ == "__main__":
 
     renderer = RoversViewer(env)
     steps = 10000
-    import time
     for step in range(steps):
         states, rewards = env.step([
-            rovers.tensor([random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)]) 
+            # rovers.tensor([random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)]) 
+            rovers.tensor([0.005, 0.005]) 
             for rover in env.rovers()])
         renderer.update()
         renderer.render()
