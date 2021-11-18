@@ -94,16 +94,17 @@ if __name__ == "__main__":
     Discrete = thyme.spaces.Discrete            # Discrete action space
 
     agents = [
-        rovers.Rover[Close, Discrete](2.0, Close(90)),
+        rovers.Rover[Close, Discrete](5.0, Close(90)),
         rovers.Rover[Close, Discrete](5.0, Close(90))
     ]
     pois = [
-        rovers.POI[rovers.CountConstraint](3, 1.0, 1),
-        rovers.POI[rovers.TypeConstraint](2, 1.0),
+        rovers.POI[rovers.CountConstraint](3, 2.0, 1),
+        rovers.POI[rovers.TypeConstraint](2.0, 1.0),
         rovers.POI[rovers.TypeConstraint](5),
-        rovers.POI[rovers.TypeConstraint](2)
+        rovers.POI[rovers.TypeConstraint](2, 5.0, rovers.TypeConstraint(2))
     ]
-
+    
+ 
 
     # Environment with rovers and pois placed in the corners. Defaults to random initialization if unspecified.
     Env = rovers.Environment[rovers.CornersInit]
@@ -113,19 +114,23 @@ if __name__ == "__main__":
     # create a (width * height) environment
     env = Env(rovers.CornersInit(width), agents, pois, width, height)
     states, rewards = env.reset()
+    
+    env.rovers()[0].set_position(22, 27)
+    env.rovers()[1].set_position(27, 22)
 
     # test
     env.pois()[0].set_position(1, 1)
     env.pois()[1].set_position(width - 1, 1)
     env.pois()[2].set_position(1, height - 1)
-    env.pois()[3].set_position(width - 1, height - 1)
+    env.pois()[3].set_position(width - 10, height - 10)
 
     renderer = RoversViewer(env)
     steps = 10000
+    
     for step in range(steps):
         states, rewards = env.step([
             # rovers.tensor([random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)]) 
-            rovers.tensor([0.005, 0.005]) 
+            rovers.tensor([0.05, 0.05])
             for rover in env.rovers()])
         renderer.update()
         renderer.render()

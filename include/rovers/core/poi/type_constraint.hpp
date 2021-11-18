@@ -14,7 +14,7 @@ namespace rovers {
  */
 class TypeConstraint {
    public:
-    TypeConstraint(size_t count = 3) : count_constraint(count) {}
+    explicit TypeConstraint(size_t count = 3) : count_constraint(count) {}
 
     [[nodiscard]] bool is_satisfied(const EntityPack& entity_pack) const {
         size_t count = 0;
