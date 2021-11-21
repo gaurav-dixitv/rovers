@@ -1,8 +1,8 @@
 cloudpickle==1.6.0
-cppyy==1.8.6
-cppyy-backend==1.14.1
-cppyy-cling==6.21.4
-CPyCppyy==1.11.7
+cppyy==2.2.0
+cppyy-backend==1.14.7
+cppyy-cling==6.25.2
+CPyCppyy==1.12.8
 future==0.18.2
 gym==0.18.0
 numpy==1.19.4
