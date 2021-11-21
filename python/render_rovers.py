@@ -53,7 +53,12 @@ class RoversViewer(rendering.Viewer):
         rendering._add_attrs(geom, attrs)
         self.add_onetime(geom)
         return geom
-
+    
+    
+    def render(self):
+        self.update()
+        super().render()
+        
     def update(self):
 
         for i in range(self.env.width() + 1):
@@ -80,7 +85,6 @@ class RoversViewer(rendering.Viewer):
             self.draw_circle(0.5, 30, color=(*color, 0.05 if poi.observed() else 0.5), filled=True).add_attr(transform)
             # observation radius
             self.draw_circle(poi.obs_radius(), 30, color=(*color, 0.05 if poi.observed() else 0.1), filled=True).add_attr(transform)
-
 
 
 if __name__ == "__main__":
