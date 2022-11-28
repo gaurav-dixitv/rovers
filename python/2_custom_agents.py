@@ -39,7 +39,7 @@ class BonkedComposition(rovers.ISensorComposition):
 
     # add noise:
     def compose(self, range, init, scale):
-        return max(range) + random.random() * self.bonk_factor
+        return random.random() * self.bonk_factor
 
 
 # aliasing some types to reduce typing
@@ -50,6 +50,7 @@ Difference = rovers.rewards.Difference      # Difference reward
 
 # Lidar with our new bonked composition policy!
 BonkedLidar = rovers.Lidar[BonkedComposition]
+
 
 # create rovers
 agents = [

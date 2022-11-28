@@ -51,7 +51,8 @@ class IRover {
     [[nodiscard]] virtual StateType scan(const AgentPack&) const = 0;
     [[nodiscard]] virtual double reward(const AgentPack&) const = 0;
 
-    virtual void act(const ActionType&) = 0;
+    // [TODO] temp cppyy super().__init__() fix
+    virtual void act(const ActionType&) {}
 
    protected:
     virtual void tick() {}
