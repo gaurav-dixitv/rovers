@@ -39,7 +39,7 @@ class BonkedComposition(rovers.ISensorComposition):
 
     # add noise:
     def compose(self, range, init, scale):
-        return random.random() * self.bonk_factor
+        return max(range) + random.random() * self.bonk_factor
 
 
 # aliasing some types to reduce typing

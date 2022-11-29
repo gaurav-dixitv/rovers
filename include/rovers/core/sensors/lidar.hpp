@@ -42,7 +42,7 @@ class Closest {
  */
 class ISensorComposition {
    public:
-    virtual inline double compose(const std::vector<double>&, double, double) const = 0;
+    virtual inline double compose(const std::vector<double>, double, double) = 0;
     virtual ~ISensorComposition() = default;
 };
 
